@@ -61,9 +61,10 @@ List<DataType>::ListNode::ListNode(const DataType& nodeData, ListNode* nextPtr){
 template <typename DataType>
 void List<DataType>::insert(const DataType& newDataItem) throw (logic_error){
 	if(!isEmpty()){
-		cursor->next=&newDataItem;
+
+		cursor->next=new ListNode(newDataItem,NULL);
 	}else{
-		head=new ListNode(&newDataItem,NULL);
+		head=new ListNode(newDataItem, NULL);
 		cursor=head;
 	}
 }
@@ -79,11 +80,62 @@ void List<DataType>::remove() throw (logic_error){
 
 template <typename DataType>
 void List<DataType>::replace(const DataType& newDataItem) throw (logic_error){
-	remove();
-	gotoPrior();
-	insert(newDataItem);
 
+	cursor->dataItem=newDataItem;
+}
 
+template <typename DataType>
+void List<DataType>::clear(){
+	gotoEnd();
+	do{
+		delete cursor;
+	}while(gotoPrior());
+}
+
+template <typename DataType>
+bool List<DataType>::isEmpty() const{
+	return head==NULL;
+}
+
+template <typename DataType>
+bool List<DataType>::isFull() const{
+	return true;
+}
+
+template <typename DataType>
+void List<DataType>::gotoBeginning() throw (logic_error){
+	cursor=head;
+}
+
+template <typename DataType>
+void List<DataType>::gotoEnd() throw (logic_error){
+	while(gotoNext()){}
+}
+
+template <typename DataType>
+bool List<DataType>::gotoNext() throw (logic_error){
+	if(cursor->next==NULL)
+		return false;
+	else{
+		cursor=cursor->next;
+		return true;
+	}
+}
+template <typename DataType>
+bool List<DataType>::gotoPrior() throw (logic_error){
+	if(cursor==head)
+		return false;
+	else{
+		ListNode* temp=cursor;
+		cursor=head;
+		while(gotoNext()&&cursor->next!=temp){}
+		return true;
+	}
+}
+
+template <typename DataType>
+DataType List<DataType>::getCursor() const throw (logic_error){
+	return cursor->dataItem;
 }
 //--------------------------------------------------------------------
 // show5.cpp: includes implementation of showStructure
