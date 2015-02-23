@@ -60,9 +60,31 @@ List<DataType>::ListNode::ListNode(const DataType& nodeData, ListNode* nextPtr){
 
 template <typename DataType>
 void List<DataType>::insert(const DataType& newDataItem) throw (logic_error){
-
+	if(!isEmpty()){
+		cursor->next=&newDataItem;
+	}else{
+		head=new ListNode(&newDataItem,NULL);
+		cursor=head;
+	}
 }
 
+template <typename DataType>
+void List<DataType>::remove() throw (logic_error){
+	ListNode* temp=cursor->next;
+	delete cursor;
+	gotoPrior();
+	cursor->next=temp;
+	cursor=temp;
+}
+
+template <typename DataType>
+void List<DataType>::replace(const DataType& newDataItem) throw (logic_error){
+	remove();
+	gotoPrior();
+	insert(newDataItem);
+
+
+}
 //--------------------------------------------------------------------
 // show5.cpp: includes implementation of showStructure
 //--------------------------------------------------------------------
