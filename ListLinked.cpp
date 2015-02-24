@@ -88,7 +88,10 @@ void List<DataType>::remove() throw (logic_error){
 		ListNode* temp2=cursor;
 		this->gotoPrior();
 		cursor->next=temp;
-		cursor=temp;
+		if(temp==NULL)
+			cursor=head;
+		else
+			cursor=temp;
 		delete temp2;
 	}
 }
