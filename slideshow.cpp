@@ -8,7 +8,7 @@
 //--------------------------------------------------------------------
 
 // Displays a slide show.
-
+//John Vande Noord
 // Uncomment the following line if running in windows
 //#define WIN32
 
