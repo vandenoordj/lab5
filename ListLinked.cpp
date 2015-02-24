@@ -61,8 +61,13 @@ List<DataType>::ListNode::ListNode(const DataType& nodeData, ListNode* nextPtr){
 template <typename DataType>
 void List<DataType>::insert(const DataType& newDataItem) throw (logic_error){
 	if(!isEmpty()){
-
-		cursor->next=new ListNode(newDataItem,NULL);
+		if(cursor->next==NULL){
+			cursor->next=new ListNode(newDataItem,NULL);
+			cursor=cursor->next;
+		}else{
+			cursor->next=new ListNode(newDataItem,cursor->next);
+			cursor=cursor->next;
+		}
 	}else{
 		head=new ListNode(newDataItem, NULL);
 		cursor=head;
@@ -71,25 +76,38 @@ void List<DataType>::insert(const DataType& newDataItem) throw (logic_error){
 
 template <typename DataType>
 void List<DataType>::remove() throw (logic_error){
-	ListNode* temp=cursor->next;
-	delete cursor;
-	gotoPrior();
-	cursor->next=temp;
-	cursor=temp;
+	if(head==NULL)
+		throw logic_error("No data");
+	if(cursor==head){
+		ListNode* temp=head;
+		head=head->next;
+		cursor=head;
+		delete temp;
+	}else{
+		ListNode* temp=cursor->next;
+		ListNode* temp2=cursor;
+		this->gotoPrior();
+		cursor->next=temp;
+		cursor=temp;
+		delete temp2;
+	}
 }
 
 template <typename DataType>
 void List<DataType>::replace(const DataType& newDataItem) throw (logic_error){
-
+	if(head==NULL)
+		throw logic_error("No data");
 	cursor->dataItem=newDataItem;
 }
 
 template <typename DataType>
 void List<DataType>::clear(){
-	gotoEnd();
+	cursor=head;
 	do{
 		delete cursor;
-	}while(gotoPrior());
+	}while(this->gotoNext());
+	head=NULL;
+	cursor=NULL;
 }
 
 template <typename DataType>
@@ -104,16 +122,22 @@ bool List<DataType>::isFull() const{
 
 template <typename DataType>
 void List<DataType>::gotoBeginning() throw (logic_error){
+	if(head==NULL)
+		throw logic_error("No data");
 	cursor=head;
 }
 
 template <typename DataType>
 void List<DataType>::gotoEnd() throw (logic_error){
-	while(gotoNext()){}
+	if(head==NULL)
+		throw logic_error("No data");
+	while(this->gotoNext()){}
 }
 
 template <typename DataType>
 bool List<DataType>::gotoNext() throw (logic_error){
+	if(head==NULL)
+		throw logic_error("No data");
 	if(cursor->next==NULL)
 		return false;
 	else{
@@ -123,18 +147,25 @@ bool List<DataType>::gotoNext() throw (logic_error){
 }
 template <typename DataType>
 bool List<DataType>::gotoPrior() throw (logic_error){
+	if(head==NULL)
+		throw logic_error("No data");
 	if(cursor==head)
 		return false;
-	else{
+	else if(head->next==cursor){
+		cursor=head;
+		return true;
+	}else{
 		ListNode* temp=cursor;
 		cursor=head;
-		while(gotoNext()&&cursor->next!=temp){}
+		while(this->gotoNext()&&cursor->next!=temp){}
 		return true;
 	}
 }
 
 template <typename DataType>
 DataType List<DataType>::getCursor() const throw (logic_error){
+	if(head==NULL)
+		throw logic_error("No data");
 	return cursor->dataItem;
 }
 //--------------------------------------------------------------------
