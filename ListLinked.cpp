@@ -120,7 +120,7 @@ bool List<DataType>::isEmpty() const{
 
 template <typename DataType>
 bool List<DataType>::isFull() const{
-	return true;
+	return false;
 }
 
 template <typename DataType>

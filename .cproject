@@ -42,11 +42,11 @@
 							</tool>
 						</toolChain>
 					</folderInfo>
-					<fileInfo id="cdt.managedbuild.config.gnu.mingw.exe.debug.1035416556.622960691" name="test5.cpp" rcbsApplicability="disable" resourcePath="test5.cpp" toolsToInvoke="cdt.managedbuild.tool.gnu.cpp.compiler.mingw.exe.debug.1726409812.286515904">
-						<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.mingw.exe.debug.1726409812.286515904" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.mingw.exe.debug.1726409812"/>
+					<fileInfo id="cdt.managedbuild.config.gnu.mingw.exe.debug.1035416556.595323731" name="test5.cpp" rcbsApplicability="disable" resourcePath="test5.cpp" toolsToInvoke="cdt.managedbuild.tool.gnu.cpp.compiler.mingw.exe.debug.1726409812.779558287">
+						<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.mingw.exe.debug.1726409812.779558287" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.mingw.exe.debug.1726409812"/>
 					</fileInfo>
 					<sourceEntries>
-						<entry excluding="test5.cpp|lab5|implementedFunctions.cpp|show5.cpp" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="slideshow.cpp|lab5|implementedFunctions.cpp|show5.cpp" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
